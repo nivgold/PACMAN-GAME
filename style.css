@@ -1,0 +1,31 @@
+#game{
+    border: solid blue;
+    background-size: cover;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+	right: 0;
+    z-index: 0;
+}
+
+
+.box-left {
+	float: left;
+    width: 350px;
+    background: yellow;
+
+    position: static;
+    z-index: 0;
+}
+
+.header-right {
+	float: right;
+    width: 350px;
+    background: cyan;
+    position: static;
+    z-index: 0;
+    left: 0;
+	right: 0;
+}
