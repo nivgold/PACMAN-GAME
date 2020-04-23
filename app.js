@@ -350,21 +350,10 @@ function UpdatePosition() {
 		score++;
 	}
 
-
-
 	board[shape.i][shape.j] = 2;
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-	if (score == 50) {
-		window.clearInterval(interval);
-		window.alert("Game completed");
-	} 
-	else {
-		Draw();
-	}
+
+
+	
 
 	
 	// MOVE MONSTERS
@@ -377,7 +366,7 @@ function UpdatePosition() {
 		board[index_i][index_j] = 0;
 		if (index_i < shape.i){
 			// monster need to move right
-			if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>0){
+			if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
 				monsters[k].i++;
 				index_i++;
 			}
@@ -385,20 +374,20 @@ function UpdatePosition() {
 
 			else if(index_j < shape.j){
 				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>0){
+				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
 					monsters[k].j++;
 					index_j++;
 				}
 			}
 			else if(index_j > shape.j){
 				// monster need to move up
-				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>0){
+				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
 					monsters[k].j--;
 					index_j--;
 				}
 				else{
 					// try left
-					if(index_i > 0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>0){
+					if(index_i > 0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
 						monsters[k].i--;
 						index_i--;
 					}
@@ -413,12 +402,12 @@ function UpdatePosition() {
 				// index_j == shape.j -> try down/up/left
 
 				//down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>0){
+				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
 					monsters[k].j++;
 					index_j++;
 				}
 				// up
-				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>0){
+				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
 					monsters[k].j--;
 					index_j--;
 				}
@@ -431,7 +420,7 @@ function UpdatePosition() {
 		}
 		else if(index_i > shape.i){
 			// monster need to move left
-			if(index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>0){
+			if(index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
 				monsters[k].i--;
 				index_i--;
 			}
@@ -439,20 +428,20 @@ function UpdatePosition() {
 
 			else if(index_j < shape.j){
 				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>0){
+				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
 					monsters[k].j++;
 					index_j++;
 				}
 			}
 			else if(index_j > shape.j){
 				// monster need to move up
-				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>0){
+				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
 					monsters[k].j--;
 					index_j--;
 				}
 				else{
 					// try right
-					if(index_i < 9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>0){
+					if(index_i < 9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
 						monsters[k].i++;
 						index_i++;
 					}
@@ -467,12 +456,12 @@ function UpdatePosition() {
 				// index_j == shape.j -> try down/up/right
 
 				//down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>0){
+				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
 					monsters[k].j++;
 					index_j++;
 				}
 				// up
-				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>0){
+				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
 					monsters[k].j--;
 					index_j--;
 				}
@@ -488,7 +477,7 @@ function UpdatePosition() {
 			
 			if (index_j > shape.j){
 				// monster need to move up
-				if( index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1] >0){
+				if( index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1] >=0){
 					monsters[k].j--;
 					index_j--;
 				}
@@ -497,12 +486,12 @@ function UpdatePosition() {
 				// try right/left/down
 				
 				// right
-				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>0){
+				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
 					monsters[k].i++;
 					index_i++;
 				}
 				// left
-				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>0){
+				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
 					monsters[k].i--;
 					index_i--;
 				}
@@ -514,7 +503,7 @@ function UpdatePosition() {
 			}
 			else if(index_j < shape.j){
 				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>0){
+				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
 					monsters[k].j++;
 					index_j++;
 				}
@@ -522,12 +511,12 @@ function UpdatePosition() {
 				
 				//try right/left/up
 				// right
-				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>0){
+				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
 					monsters[k].i++;
 					index_i++;
 				}
 				// left
-				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j] >0){
+				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j] >=0){
 					monsters[k].i--;
 					index_i--;
 				}
@@ -539,10 +528,28 @@ function UpdatePosition() {
 			}
 			else{
 				// the monster and the pacman are at the same position
-				alert("MONSTER COUGTH PACMAN")
+				alert("MONSTER COUGTH PACMAN");
+				drawCanvas();
+				lives--;
+				Start();
 			}
 		}
 		board[index_i][index_j] = value;
+	}
+
+
+
+	var currentTime = new Date();
+	time_elapsed = (currentTime - start_time) / 1000;
+	if (score >= 20 && time_elapsed <= 10) {
+		pac_color = "green";
+	}
+	if (score == 50) {
+		window.clearInterval(interval);
+		window.alert("Game completed");
+	} 
+	else {
+		Draw();
 	}
 }
 
