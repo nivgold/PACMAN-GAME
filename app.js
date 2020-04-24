@@ -7,7 +7,6 @@ var start_time;
 var time_elapsed;
 var interval;
 
-
 //SETTINGS:
 var keys = {
 	key_up:38, key_Down:40, key_Left:37, key_right:39,
@@ -20,45 +19,7 @@ var monsters = new Array();
 //END OF SETTINGS
 //////////////////////////////////
 
-//DRAWING:
-function monster_drawing() {
-	let cent = 210;// 60*position
-	//MONSTER:
-	context.beginPath();
-	context.moveTo(cent - 20, cent - 10);
-	context.lineTo(cent - 20, cent + 15);
-	context.lineTo(cent - 15, cent + 10);
-	context.lineTo(cent - 10, cent + 15);
-	context.lineTo(cent - 5, cent + 10);
-	context.lineTo(cent, cent + 15);
-	context.lineTo(cent + 5, cent + 10);
-	context.lineTo(cent + 10, cent + 15);
-	context.lineTo(cent + 15, cent + 10);
-	context.lineTo(cent + 20, cent + 15);
-	context.lineTo(cent + 20, cent - 10);
-	context.lineWidth = 2;
-	context.fillStyle = "red";
-	context.fill();
-	context.beginPath();
-	context.arc(cent, cent - 5, 20, 0, Math.PI, true);
-	context.fillStyle = "red";
-	context.fill();
-	context.beginPath();
-	context.fillStyle = "white";
-	context.arc(cent - 10, cent - 10, 4, 0, 2 * Math.PI);
-	context.arc(cent + 10, cent - 10, 4, 0, 2 * Math.PI);
-	context.fill();
-
-	//MONSTER - EYE:
-	context.beginPath();
-	context.fillStyle = "black";
-	context.arc(cent - 12, cent - 10, 2, 0, 2 * Math.PI);
-	context.arc(cent + 8, cent - 10, 2, 0, 2 * Math.PI);
-	context.fill();
-}
-
-
-$(document).ready(function () {
+$(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
 });
@@ -76,9 +37,13 @@ function Start() {
 	var cnt = 100;
 	var food_remain = 50;
 	var pacman_remain = 1;
+	start_time = new Date();
+
+	// START OF SETTINGS
+	keys.setDefualt();
 
 	//MONSTER:
-	var num_of_monsters = 4;
+	var num_of_monsters = 1;
 	for (let k=0; k<num_of_monsters; k++){
 		monsters[k] = new Object();
 		if (k==0){
@@ -100,12 +65,6 @@ function Start() {
 		monsters[k].speed = 15;
 	}
 
-	//END OF SETTINGS
-	///////////////
-
-	start_time = new Date();
-	keys.setDefualt();
-
 	for (var m=0; m<10; m++){
 		board[m] = new Array();
 	}
@@ -118,68 +77,33 @@ function Start() {
 		board[index_i][index_j] = value;
 	}
 
-	
+	//END OF SETTINGS
+	///////////////
 
+	
 	for (var i = 0; i < 10; i++) {
+		//board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
-
-			//WALLS:
 			if (
-				(i == 1 && j == 1) ||
-				(i == 2 && j == 1) ||
-				(i == 3 && j == 1) ||
-				(i == 4 && j == 1) ||
-				(i == 6 && j == 1) ||
-				(i == 7 && j == 1) ||
-				(i == 8 && j == 1) ||
-				(i == 3 && j == 2) ||
-				(i == 4 && j == 2) ||
-				(i == 0 && j == 3) ||
-				(i == 1 && j == 3) ||
-				(i == 6 && j == 3) ||
-				(i == 8 && j == 3) ||
-				(i == 9 && j == 3) ||
+				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
-				(i == 4 && j == 4) ||
-				(i == 5 && j == 4) ||
-				(i == 6 && j == 4) ||
-				(i == 0 && j == 5) ||
-				(i == 1 && j == 5) ||
 				(i == 3 && j == 5) ||
-				(i == 4 && j == 5) ||
-				(i == 5 && j == 5) ||
-				(i == 6 && j == 5) ||
-				(i == 8 && j == 5) ||
-				(i == 9 && j == 5) ||
-				(i == 1 && j == 6) ||
-				(i == 6 && j == 6) ||
-				(i == 8 && j == 6) ||
-				(i == 3 && j == 7) ||
-				(i == 4 && j == 7) ||
-				(i == 1 && j == 8) ||
-				(i == 2 && j == 8) ||
-				(i == 3 && j == 8) ||
-				(i == 4 && j == 8) ||
-				(i == 6 && j == 8) ||
-				(i == 7 && j == 8) ||
-				(i == 8 && j == 8) 
+				(i == 6 && j == 1) ||
+				(i == 6 && j == 2)
 			) {
 				board[i][j] = 4;
-				
 			}
 			else if (board[i][j] < 0){
 				// monster over here
 			}
-			else{
-				//FOOD:
+			else {
 				var randomNum = Math.random();
+				//FOOD:
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
 					board[i][j] = 1;
-
-					
-				}
+				} 
 				//PACMANS:
 				else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
@@ -187,7 +111,7 @@ function Start() {
 					pacman_remain--;
 					board[i][j] = 2;
 				}
-				else {
+				 else {
 					board[i][j] = 0;
 				}
 				cnt--;
@@ -202,31 +126,23 @@ function Start() {
 		food_remain--;
 	}
 
-
-
-
-	//GAME KEYS:
 	keysDown = {};
 	addEventListener(
 		"keydown",
-		function (e) {
+		function(e) {
 			keysDown[e.keyCode] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
-		function (e) {
+		function(e) {
 			keysDown[e.keyCode] = false;
 		},
 		false
 	);
 
-
-	// SETTING THE INTERVAL
-	interval = setInterval(UpdatePosition, 300);
-
-
+	interval = setInterval(UpdatePosition, 50);
 }
 
 function findRandomEmptyCell(board) {
@@ -241,19 +157,19 @@ function findRandomEmptyCell(board) {
 
 function GetKeyPressed() {
 	//UP
-	if (keysDown[keys.key_up]) {
+	if (keysDown[38]) {
 		return 1;
 	}
 	//DOWN
-	if (keysDown[keys.key_Down]) {
+	if (keysDown[40]) {
 		return 2;
 	}
 	//LEFT
-	if (keysDown[keys.key_Left]) {
+	if (keysDown[37]) {
 		return 3;
 	}
 	//RIGHT
-	if (keysDown[keys.key_right]) {
+	if (keysDown[39]) {
 		return 4;
 	}
 }
@@ -271,7 +187,6 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-
 
 
 			// DRAW MONSTER
@@ -313,232 +228,44 @@ function Draw() {
 				context.fillStyle = "blue"; //color
 				context.fill();
 			}
+
+			// DRAW MONSTER
+			if(board[i][j] < 0){
+				var value = board[i][j];
+				var id = -value-1;
+				drawMonster(center.x, center.y, 5, id);
+			}
 		}
 	}
 }
 
-
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	//UP
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
 	}
-	//DOWN
 	if (x == 2) {
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
-	//LEFT
 	if (x == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
 	}
-	//RIGHT
 	if (x == 4) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
-	// PACMAN EAT FOOD
 	if (board[shape.i][shape.j] == 1) {
 		score++;
 	}
-
 	board[shape.i][shape.j] = 2;
-
-
-	
-
-	
-	// MOVE MONSTERS
-
-	for(let k=0; k<monsters.length; k++){
-		var index_i = monsters[k].i;
-		var index_j = monsters[k].j;
-		var value = -k-1;
-		// clean the last position the monster was
-		board[index_i][index_j] = 0;
-		if (index_i < shape.i){
-			// monster need to move right
-			if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
-				monsters[k].i++;
-				index_i++;
-			}
-			// cant move right
-
-			else if(index_j < shape.j){
-				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
-					monsters[k].j++;
-					index_j++;
-				}
-			}
-			else if(index_j > shape.j){
-				// monster need to move up
-				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
-					monsters[k].j--;
-					index_j--;
-				}
-				else{
-					// try left
-					if(index_i > 0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
-						monsters[k].i--;
-						index_i--;
-					}
-					// try down
-					else{
-						monsters[k].j++;
-						index_j++;
-					}
-				}
-			}
-			else{
-				// index_j == shape.j -> try down/up/left
-
-				//down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
-					monsters[k].j++;
-					index_j++;
-				}
-				// up
-				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
-					monsters[k].j--;
-					index_j--;
-				}
-				// left
-				else{
-					monsters[k].i--;
-					index_i--;
-				}
-			}
-		}
-		else if(index_i > shape.i){
-			// monster need to move left
-			if(index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
-				monsters[k].i--;
-				index_i--;
-			}
-			// cant move left
-
-			else if(index_j < shape.j){
-				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
-					monsters[k].j++;
-					index_j++;
-				}
-			}
-			else if(index_j > shape.j){
-				// monster need to move up
-				if (index_j>0  && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
-					monsters[k].j--;
-					index_j--;
-				}
-				else{
-					// try right
-					if(index_i < 9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
-						monsters[k].i++;
-						index_i++;
-					}
-					// try down
-					else{
-						monsters[k].j++;
-						index_j++;
-					}
-				}
-			}
-			else{
-				// index_j == shape.j -> try down/up/right
-
-				//down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
-					monsters[k].j++;
-					index_j++;
-				}
-				// up
-				else if (index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1]>=0){
-					monsters[k].j--;
-					index_j--;
-				}
-				// right
-				else{
-					monsters[k].i++;
-					index_i++;
-				}
-			}
-		}
-		else{
-			// monster and pacman are at the same column (index.i == shape.i)
-			
-			if (index_j > shape.j){
-				// monster need to move up
-				if( index_j>0 && board[index_i][index_j-1] != 4 && board[index_i][index_j-1] >=0){
-					monsters[k].j--;
-					index_j--;
-				}
-				// cant move up
-
-				// try right/left/down
-				
-				// right
-				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
-					monsters[k].i++;
-					index_i++;
-				}
-				// left
-				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j]>=0){
-					monsters[k].i--;
-					index_i--;
-				}
-				//down
-				else{
-					monsters[k].j++;
-					index_j++;
-				}
-			}
-			else if(index_j < shape.j){
-				// monster need to move down
-				if (index_j<9 && board[index_i][index_j+1] != 4 && board[index_i][index_j+1]>=0){
-					monsters[k].j++;
-					index_j++;
-				}
-				//cant move down
-				
-				//try right/left/up
-				// right
-				if (index_i<9 && board[index_i+1][index_j] != 4 && board[index_i+1][index_j]>=0){
-					monsters[k].i++;
-					index_i++;
-				}
-				// left
-				if (index_i>0 && board[index_i-1][index_j] != 4 && board[index_i-1][index_j] >=0){
-					monsters[k].i--;
-					index_i--;
-				}
-				// up
-				else{
-					monsters[k].j--;
-					index_j--;
-				}
-			}
-			else{
-				// the monster and the pacman are at the same position
-				alert("MONSTER COUGTH PACMAN");
-				drawCanvas();
-				lives--;
-				Start();
-			}
-		}
-		board[index_i][index_j] = value;
-	}
-
-
-
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (score >= 20 && time_elapsed <= 10) {
@@ -547,13 +274,10 @@ function UpdatePosition() {
 	if (score == 50) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
-	} 
-	else {
+	} else {
 		Draw();
 	}
 }
-
-
 
 function drawCanvas(){
 	canvas = document.getElementById('canvas');
