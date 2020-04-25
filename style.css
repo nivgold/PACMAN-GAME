@@ -1,13 +1,9 @@
 #game{
     border: solid blue;
-    background-size: cover;
-    width: 600px;
-    height: 600px;
-    margin: auto;
-    position: absolute;
-    left: 0;
-	right: 0;
-    z-index: 0;
+    width: 1080px;
+    height: 780px;
+    margin-left: 350px;
+    position: fixed;
 }
 
 
@@ -22,7 +18,7 @@
 
 .header-right {
 	float: right;
-    width: 350px;
+    width: 288px;
     background: cyan;
     position: static;
     z-index: 0;

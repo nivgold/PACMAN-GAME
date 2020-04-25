@@ -34,7 +34,7 @@ function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
-	var cnt = 100;
+	var cnt = 234;
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
@@ -51,21 +51,21 @@ function Start() {
 			monsters[k].j = 0;
 		}
 		else if(k==1){
-			monsters[k].i = 9;
+			monsters[k].i = 17;
 			monsters[k].j = 0;
 		}
 		else if(k==2){
-			monsters[k].i = 9;
-			monsters[k].j = 9;
+			monsters[k].i = 17;
+			monsters[k].j = 12;
 		}
 		else if(k==3){
 			monsters[k].i = 0;
-			monsters[k].j = 9;
+			monsters[k].j = 12;
 		}
 		monsters[k].speed = 15;
 	}
 
-	for (var m=0; m<10; m++){
+	for (var m=0; m<18; m++){
 		board[m] = new Array();
 	}
 
@@ -81,18 +81,133 @@ function Start() {
 	///////////////
 
 	
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 18; i++) {
 		//board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
+		for (var j = 0; j < 13; j++) {
+			//WALLS:
 			if (
+				(i == 0 && j == 0) ||
+				(i == 0 && j == 1) ||
+				(i == 0 && j == 2) ||
+				(i == 0 && j == 3) ||
+				(i == 0 && j == 4) ||
+				(i == 0 && j == 5) ||
+				(i == 0 && j == 7) ||
+				(i == 0 && j == 8) ||
+				(i == 0 && j == 9) ||
+				(i == 0 && j == 10) ||
+				(i == 0 && j == 11) ||
+				(i == 0 && j == 12) ||
+				(i == 1 && j == 0) ||
+				(i == 1 && j == 5) ||
+				(i == 1 && j == 7) ||
+				(i == 1 && j == 8) ||
+				(i == 1 && j == 12) ||
+				(i == 2 && j == 0) ||
+				(i == 2 && j == 2) ||
+				(i == 2 && j == 3) ||
+				(i == 2 && j == 10) ||
+				(i == 2 && j == 12) ||
+				(i == 3 && j == 0) ||
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				(i == 3 && j == 7) ||
+				(i == 3 && j == 8) ||
+				(i == 3 && j == 12) ||
+				(i == 4 && j == 0) ||
+				(i == 4 && j == 1) ||
+				(i == 4 && j == 5) ||
+				(i == 4 && j == 7) ||
+				(i == 4 && j == 8) ||
+				(i == 4 && j == 9) ||
+				(i == 4 && j == 11) ||
+				(i == 4 && j == 12) ||
+				(i == 5 && j == 0) ||
+				(i == 5 && j == 8) ||
+				(i == 5 && j == 9) ||
+				(i == 5 && j == 11) ||
+				(i == 5 && j == 12) ||
+				(i == 8 && j == 8) ||
+				(i == 6 && j == 0) ||
+				(i == 6 && j == 2) ||
+				(i == 6 && j == 5) ||
+				(i == 6 && j == 6) ||
+				(i == 6 && j == 8) ||
+				(i == 6 && j == 12) ||
+				(i == 7 && j == 0) ||
+				(i == 7 && j == 2) ||
+				(i == 7 && j == 4) ||
+				(i == 7 && j == 6) ||
+				(i == 7 && j == 8) ||
+				(i == 7 && j == 10) ||
+				(i == 7 && j == 12) ||
+				(i == 8 && j == 0) ||
+				(i == 8 && j == 6) ||
+				(i == 8 && j == 10) ||
+				(i == 8 && j == 12) ||
+				(i == 9 && j == 0) ||
+				(i == 9 && j == 6) ||
+				(i == 9 && j == 10) ||
+				(i == 9 && j == 12) ||
+				(i == 10 && j == 0) ||
+				(i == 10 && j == 2) ||
+				(i == 10 && j == 4) ||
+				(i == 10 && j == 6) ||
+				(i == 10 && j == 10) ||
+				(i == 10 && j == 12) ||
+				(i == 11 && j == 0) ||
+				(i == 11 && j == 2) ||
+				(i == 11 && j == 5) ||
+				(i == 11 && j == 6) ||
+				(i == 11 && j == 8) ||
+				(i == 11 && j == 12) ||
+				(i == 12 && j == 0) ||
+				(i == 12 && j == 8) ||
+				(i == 12 && j == 9) ||
+				(i == 12 && j == 11) ||
+				(i == 12 && j == 12) ||
+				(i == 13 && j == 0) ||
+				(i == 13 && j == 1) ||
+				(i == 13 && j == 5) ||
+				(i == 13 && j == 7) ||
+				(i == 13 && j == 8) ||
+				(i == 13 && j == 9) ||
+				(i == 13 && j == 11) ||
+				(i == 13 && j == 12) ||
+				(i == 14 && j == 0) ||
+				(i == 14 && j == 3) ||
+				(i == 14 && j == 4) ||
+				(i == 14 && j == 5) ||
+				(i == 14 && j == 7) ||
+				(i == 14 && j == 8) ||
+				(i == 14 && j == 12) ||
+				(i == 15 && j == 0) ||
+				(i == 15 && j == 2) ||
+				(i == 15 && j == 3) ||
+				(i == 15 && j == 10) ||
+				(i == 15 && j == 12) ||
+				(i == 16 && j == 0) ||
+				(i == 16 && j == 5) ||
+				(i == 16 && j == 7) ||
+				(i == 16 && j == 8) ||
+				(i == 16 && j == 12) ||
+				(i == 17 && j == 0) ||
+				(i == 17 && j == 1) ||
+				(i == 17 && j == 2) ||
+				(i == 17 && j == 3) ||
+				(i == 17 && j == 4) ||
+				(i == 17 && j == 5) ||
+				(i == 17 && j == 7) ||
+				(i == 17 && j == 8) ||
+				(i == 17 && j == 9) ||
+				(i == 17 && j == 10) ||
+				(i == 17 && j == 11) ||
+				(i == 17 && j == 12) 
 			) {
 				board[i][j] = 4;
+				
 			}
 			else if (board[i][j] < 0){
 				// monster over here
@@ -182,8 +297,8 @@ function Draw() {
 
 	drawCanvas();
 
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 18; i++) {
+		for (var j = 0; j < 13; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
@@ -248,7 +363,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < 12 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
@@ -258,7 +373,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < 17 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
@@ -281,8 +396,8 @@ function UpdatePosition() {
 
 function drawCanvas(){
 	canvas = document.getElementById('canvas');
-	canvas.heigth = 600;
-	canvas.weight = 600;
+	canvas.heigth = 780;
+	canvas.weight = 1080;
 	context.fillStyle = "black";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 }
