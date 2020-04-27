@@ -13,12 +13,12 @@ var keys = {
 	setDefualt: function () { this.key_up = 38, this.key_Down = 40, this.key_Left = 37, this.key_right = 39 },
 	changeKeys: function (up, down, left, right) { this.key_up = up, this.key_Down = down, this.key_Left = left, this.key_right = right }
 }
-var lives = 3;
+var lives = 5;
 var username = "player";
 var gameStatus = 0;
 //monsters:
 var monster_turn = 12;
-var num_of_monsters = 1;
+var num_of_monsters = 4;
 var monsters = new Array();
 //END OF SETTINGS
 //////////////////////////////////
@@ -54,16 +54,16 @@ function Start() {
 			monsters[k].j = 90;
 		}
 		else if(k==1){
-			monsters[k].i = 16;
-			monsters[k].j = 1;
+			monsters[k].i = 990;
+			monsters[k].j = 90;
 		}
 		else if(k==2){
-			monsters[k].i = 16;
-			monsters[k].j = 11;
+			monsters[k].i = 990;
+			monsters[k].j = 690;
 		}
 		else if(k==3){
-			monsters[k].i = 1;
-			monsters[k].j = 11;
+			monsters[k].i = 90;
+			monsters[k].j = 690;
 		}
 		monsters[k].speed = 5;
 	}
@@ -290,14 +290,6 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-
-
-			// DRAW MONSTER
-			if(board[i][j] < 0){
-				var value = board[i][j];
-				var id = -value-1;
-				drawMonster(center.x, center.y, 5, id);
-			}
 
 			//DRAW PACMAN
 			if (board[i][j] == 2) {
@@ -675,16 +667,16 @@ function resetPositions(){
 			monsters[k].j = 90;
 		}
 		else if(k==1){
-			monsters[k].i = 16;
-			monsters[k].j = 1;
+			monsters[k].i = 990;
+			monsters[k].j = 90;
 		}
 		else if(k==2){
-			monsters[k].i = 16;
-			monsters[k].j = 11;
+			monsters[k].i = 990;
+			monsters[k].j = 690;
 		}
 		else if(k==3){
-			monsters[k].i = 1;
-			monsters[k].j = 11;
+			monsters[k].i = 90;
+			monsters[k].j = 690;
 		}
 		monsters[k].direction = null;
 	}
