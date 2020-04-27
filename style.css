@@ -4,6 +4,7 @@
     height: 780px;
     margin-left: 350px;
     position: fixed;
+    overflow: hidden;
 }
 
 

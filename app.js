@@ -16,6 +16,10 @@ var keys = {
 var lives = 5;
 var username = "player";
 var gameStatus = 0;
+//balls
+var p5BallImg;
+var p15BallImg;
+var p25BallImg;
 //monsters:
 var monster_turn = 12;
 var num_of_monsters = 4;
@@ -45,6 +49,14 @@ function Start() {
 
 	// START OF SETTINGS
 	keys.setDefualt();
+
+	//BALLS Imgs
+	p5BallImg = new Image();
+	p5BallImg.src = "./balls/blue.png";
+	p15BallImg = new Image();
+	p15BallImg.src = "./balls/red.png"
+	p25BallImg = new Image();
+	p25BallImg.src = "./balls/yellow.png"
 
 	//MONSTER:
 	for (let k=0; k<num_of_monsters; k++){
@@ -201,9 +213,6 @@ function Start() {
 			) {
 				board[i][j] = 4;
 			}
-			else if (board[i][j] < 0){
-				// monster over here
-			}
 			else{
 				board[i][j] = 0;
 			}
@@ -222,11 +231,32 @@ function Start() {
 	}
 	
 	//FOOD:
-	while (food_remain > 0) {
+	var p5Ball = 0.6*food_remain;
+	var p15Ball = 0.3*food_remain;
+	var p25Ball = food_remain - (p5Ball + p15Ball);
+
+	while( p5Ball > 0){
 		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
-		food_remain--;
+		board[emptyCell[0]][emptyCell[1]] = 5;
+		p5Ball--;
 	}
+	while( p15Ball > 0){
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 15;
+		p15Ball--;
+	}
+	while( p25Ball > 0){
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 25;
+		p25Ball--;
+	}
+
+
+	// while (food_remain > 0) {
+	// 	var emptyCell = findRandomEmptyCell(board);
+	// 	board[emptyCell[0]][emptyCell[1]] = 1;
+	// 	food_remain--;
+	// }
 
 	keysDown = {};
 	addEventListener(
@@ -245,6 +275,8 @@ function Start() {
 	);
 
 	interval = setInterval(UpdatePosition, 50);
+
+	console.log(board);
 }
 
 function findRandomEmptyCell(board) {
@@ -297,15 +329,16 @@ function Draw() {
 
 			} 
 			//DRAW FOOD
-			else if (board[i][j] == 1) {
-				context.beginPath();
-				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
-				context.fillStyle = "white"; //color
-				context.fill();
+			else if (board[i][j] == 5 || board[i][j] == 15 || board[i][j] == 25) {
+				drawBall(i, j, board[i][j]);
+				// context.beginPath();
+				// context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "white"; //color
+				// context.fill();
 
-				context.font = "10px Comic Sans MS";
-				context.fillStyle = "red";
-				context.fillText("1", center.x -2.5, center.y + 4);
+				// context.font = "10px Comic Sans MS";
+				// context.fillStyle = "red";
+				// context.fillText("1", center.x -2.5, center.y + 4);
 				
 			} 
 			//DRAW WALL
@@ -365,8 +398,8 @@ function UpdatePosition() {
 	}
 
 	// check if food:
-	if (board[shape.i][shape.j] == 1) {
-		score++;
+	if (board[shape.i][shape.j] >= 5) {
+		score+=board[shape.i][shape.j];
 	}
 
 	if (monster_turn == 0){
@@ -383,18 +416,18 @@ function UpdatePosition() {
 		var currentMonster = monsters[k];
 		if (check_x_and_y(currentMonster.i, currentMonster.j, shape_x, shape_y)){
 			if (lives == 1){
+				Draw();
 				lives--;
 				score -= 10;
 				gameStatus = 1;
-				Draw();
 			}
 			else{
+				Draw();
 				resetKeys();
 				score-=10;
 				lives--;
 				window.alert("lost live");
 				resetPositions();
-				Draw();
 			}
 		}
 	}
@@ -648,8 +681,6 @@ function moveMonsters(){
 function resetPositions(){
 	board[shape.i][shape.j] = 0;
 
-	
-
 	// PACMAN:
 	var pacman_remain = 1;
 	while(pacman_remain>0){
@@ -707,5 +738,32 @@ function gameLost(){
 function resetKeys(){
 	for (var key in keysDown){
 		keysDown[key] = false;
+	}
+}
+
+function drawBall(index_i, index_j, value){
+	if (value == 5){
+		// draw 5 ball
+		context.drawImage(p5BallImg, index_i*60+15, index_j*60+15, 30, 30);
+		context.beginPath();
+		context.font = "15px Comic Sans MS";
+		context.fillStyle = "white";
+		context.fillText("5", index_i*60+23, index_j*60+31 + 4);
+	}
+	else if (value == 15){
+		// draw 15 ball
+		context.drawImage(p15BallImg, index_i*60+15, index_j*60+15, 30, 30);
+		context.beginPath();
+		context.font = "16px Comic Sans MS";
+		context.fillStyle = "white";
+		context.fillText("15", index_i*60+21, index_j*60+31.5 + 4);
+	}
+	else if (value == 25){
+		// draw 25 ball
+		context.drawImage(p25BallImg, index_i*60+15, index_j*60+15, 30, 30)
+		context.beginPath();
+		context.font = "21px Comic Sans MS";
+		context.fillStyle = "black";
+		context.fillText("25", index_i*60+17, index_j*60+33 + 4);
 	}
 }
