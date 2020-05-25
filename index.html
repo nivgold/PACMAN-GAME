@@ -1,54 +1,550 @@
 <!DOCTYPE html>
-<html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- MetaData -->
+    <META NAME="keywords" CONTENT="pacman, game, browser game, online game">
+    <META NAME="description" CONTENT="This WebSite is one of the assignments in Web Development Environments course of BGU UNIVERSITY - April 2020.
+            As part of practicing HTML5, CSS, JavaScript, jQuery, Gaming and HTML Canvas Drawing.
+            This Web site will help .">
 
-	<script src="./jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="./app.js"></script>
+    <title>PAC-MAN - Browser Game</title>
+    <link rel="icon" href="https://seeklogo.com/images/P/pac-man-retro-logo-731613766E-seeklogo.com.png"
+        type="image/x-icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/register.css" />
+    <link rel="stylesheet" type="text/css" href="css/settings.css" />
+    <link rel="stylesheet" type="text/css" href="css/game.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="scripts/jquery-3.4.1.slim.min.js"></script>
+
+    <!-- JS: Interface -->
+    <script type="text/javascript" src="scripts/interface/storageManager.js"></script>
+    <script type="text/javascript" src="scripts/interface/scripts.js"></script>
+    <script type="text/javascript" src="scripts/interface/login.js"></script>
+    <script type="text/javascript" src="scripts/interface/register.js"></script>
+
+    <!-- JS: Game -->
+    <script type="text/javascript" src="scripts/game/drawings.js"></script>
+    <script type="text/javascript" src="scripts/game/buildingMaze.js"></script>
+    <script type="text/javascript" src="scripts/game/game.js"></script>
+    <script type="text/javascript" src="scripts/game/settings.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
+    <div class="allSite">
+        <div style="color: white;">
+            Niv Goldshlager & Ron Israel
+        </div>
 
-	<div style="width:1366; height: 800px; border: black solid;">
+        <div class="content">
+            <div class="top">
+                <img src="images/logo.png">
+
+                <!-- MENU FOR UNCONNECTED USER -->
+                <div id="menu1" class="menu">
+                    <ul class="nav nav-tabs n1">
+                        <li class="nav-item menu-button">
+                            <a id="button_welcome" class="nav-link" href="#" onClick="show('welcome')">Welcome</a>
+                        </li>
+                        <li class="nav-item menu-button">
+                            <a id="button_register" class="nav-link" href="#" onClick="show('register')">Register</a>
+                        </li>
+
+                        <li class="nav-item menu-button">
+                            <a id="button_login" class="nav-link" href="#" onClick="show('login')">Login</a>
+                        </li>
+
+                        <li class="nav-item menu-button">
+                            <a id="button_about" class="nav-link" href="#" data-toggle="modal"
+                                data-target="#about">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- MENU FOR UNCONNECTED USER -->
+
+                <!-- MENU FOR CONNECTED USERS -->
+                <div id="menu2" class="menu">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item menu-button">
+                            <a id="button_welcome" class="nav-link" href="#" onClick="show('welcome')">Welcome</a>
+                        </li>
+                        <li class="nav-item menu-button">
+                            <a id="button_profile" class="nav-link" href="#" onClick="show('profile')">Profile</a>
+                        </li>
+                        <li class="nav-item menu-button">
+                            <a id="button_settings" class="nav-link" href="#" onClick="show('settings')">Settings</a>
+                        </li>
+                        <li class="nav-item menu-button">
+                            <a id="button_about" class="nav-link" href="#" data-toggle="modal"
+                                data-target="#about">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- MENU FOR CONNECTED USERS -->
+            </div>
 
 
-		<div class="box-left">
-			<table>
-				<tr>
-					<div id="name">
-						<label for="lblName">Pacman Name:</label>
-						<input id="lblName" type="text" />
-					</div>
-				</tr>
-				<tr>
-					<div id="score">
-						<label for="lblScore">SCORE:</label>
-						<input id="lblScore" type="text" />
-					</div>
-				</tr>
-				<tr>
-					<div id="lives">
-						<label for="lblLives">LIVES:</label>
-						<input id="lblLives" type="text" />
-					</div>
-				</tr>
-				<tr>
-					<div id="time">
-						<label for="lblTime">TIME:</label>
-						<input id="lblTime" type="text" />
-					</div>
-				</tr>
-			</table>
-		</div>
-		
-		<div id="game">
-			<canvas id="canvas" height="780" width="1080"></canvas>
-		</div>
+            <!-- WELCOME -->
+            <div id="welcome" class="col">
+                <p id="welcome_msg"></p>
+                <div class="welcome_text">
+                    </o>Your <b>Pac-Man</b> must eat <u>all of the dots</u> inside an enclosed maze while avoiding 1 to
+                    4 colored ghosts.
+                    <br> Eating those dots called "Power Pellets" give your Pac-Man a bonus of 5, 15 or 25 points.
+                    <br> If your Pac-Man makes contact with a ghost, he will <u>lose a life</u>,
+                    <br> The game ends when his all 5 lives are lost.
+                    <br> Each of the four ghosts have <u>artificial intelligence</u> - so <b>be carefully!</b>
+                    <br> Don't miss the <i>Moving Score</i> - you can get 50 points more!
+                    <br><b>Don't forget</b>- you've got a <u>limited time</u> for that mission.
+                    <br><b>GOOD LUCK!</b>
+                </div>
+                <div class="row">
+                    <td>
+                        <button type="button" class="btn btn-primary" id="welcome_btn_login" 
+                            onClick="show('login')" style="margin:5px;">Login</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" id="welcome_btn_register"
+                            onClick="show('register')" style="margin:5px;">Register</button>
+                    </td>
+                </div>
+                <div class="row">
+                    <td><button type="button" class="btn btn-primary" id="welcome_btn_startgame"
+                            onClick="show('settings')" style="margin:5px">Start
+                            Game</button></td>
+                    <td><button type="button" class="btn btn-primary" id="btn_logoff" onclick="disconnect()"
+                            style="margin:5px">Log
+                            Off</button></td>
+                </div>
+            </div>
+            <!-- WELCOME -->
 
-		<div class="header-right">RIGHT</div>
 
-	</div>
+            <!-- PROFILE -->
+            <!-- username -->
+            <div id="profile" class="col">
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col-25">
+                            <label>User Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="profile_username">
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- email -->
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="email" id="profile_email">
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- fname -->
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col-25">
+                            <label>First Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="profile_fname">
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- lname -->
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="profile_lname">
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- bdate -->
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Birth Date</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="profile_bday">
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- update password -->
+                <div class="row">
+                    <div class="col-25">
+                        <label>New Password</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" id="profile_pass">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onClick="show('settings')">StartGame</button>
+                <button type="button" class="btn btn-primary" onClick="updatePass()">Update</button>
+                <button type="button" class="btn btn-primary" onclick="disconnect()">Log Off</button>
+            </div>
+            <!-- PROFILE -->
+
+
+            <!-- REGISTER -->
+            <div id="register" class="col">
+                <div id="register_errors" class="register_errors"></div>
+                <form id="registerForm">
+                    <div class="row">
+                        <div class="col-25">
+                            <label>User Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="register_username">
+                        </div>
+                    </div>
+                    <!-- password -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Password</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="register_password">
+                        </div>
+                    </div>
+                    <!-- fname -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label>First Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="register_fname">
+                        </div>
+                    </div>
+                    <!-- lname -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="register_lname">
+                        </div>
+                    </div>
+                    <!-- email -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="email" id="register_email">
+                        </div>
+                    </div>
+                    <!-- bdate -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label>Birth Date</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="register_bday">
+                        </div>
+                    </div>
+                    <!-- registerBTN -->
+                    <div class="row">
+                        <button type="button" class="btn btn-primary btn_regist" onclick="btn_regist()">create new
+                            Pacman</button>
+                    </div>
+                </form>
+            </div>
+            <!-- REGISTER -->
+
+
+            <!-- LOGIN -->
+            <div id="login" class="col">
+                <!-- username -->
+                <div class="row">
+                    <div class="col-25">
+                        <label>User Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="login_username">
+                    </div>
+                </div>
+                <!-- password -->
+                <div class="row">
+                    <div class="col-25">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" id="login_pass">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="connect_btn()">Connect</button>
+            </div>
+            <!-- LOGIN -->
+
+
+            <!-- SETTINGS -->
+            <div id="settings" class="col">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne" style="height: auto; padding: 0;">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne">
+                                Set Time | Power Pellets | Ghosts
+                            </button>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- set max time -->
+                                <div id="setTime" class="setSettings">
+                                    <span style="margin: 10px;">SET TIME:</span>
+                                    <input type="number" id="setTimmer" value="60"
+                                        onchange="setTime($('#setTimmer').val());" style="width: 70px;">
+                                </div>
+                                <!-- set power pellets colors -->
+                                <div id="setBalls" class="setSettings">
+                                    <table>
+                                        <tr>
+                                            <div>
+                                                <span>Power Pellets:</span>
+                                                <input type="number" id="setBallsNumber" min="50" max="90" value="90"
+                                                    onchange="setNumOfBalls($('#setBallsNumber').val());"
+                                                    style="width: 70px;">
+                                            </div>
+                                            <td><label>5 points</label>
+                                                <select class="form-control" id="setp5" onchange="setBalls()">
+                                                    <option>red</option>
+                                                    <option>blue</option>
+                                                    <option>yellow</option>
+                                                </select></td>
+                                            <td><label>15 points</label>
+                                                <select class="form-control" id="setp15" onchange="setBalls()">
+                                                    <option>blue</option>
+                                                    <option>red</option>
+                                                    <option>yellow</option>
+                                                </select></td>
+                                            <td><label>25 points</label>
+                                                <select class="form-control" id="setp25" onchange="setBalls()">
+                                                    <option>yellow</option>
+                                                    <option>blue</option>
+                                                    <option>red</option>
+                                                </select></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="setGhosts" class="setSettings">
+                                    <div style="width:100%;">
+                                        <span>Number of Ghosts:</span>
+                                        <input type="number" id="setGhostNumber" min="1" max="4" value="4"
+                                            onchange="setNumOfGhosts($('#setGhostNumber').val());" style="width: 70px;">
+                                    </div>
+                                </div>
+                                <!-- random setting BTN -->
+                                <div>
+                                    <button type="button" class="btn btn-primary" id="btn_setRandom"
+                                        onclick="btnRandom()">Random</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <!-- set playing keys -->
+                        <div class="card-header" id="headingTwo" style="height: auto; padding: 0;">
+                            <button class="btn collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo">
+                                Change Keys
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="button" id="keyup" class="inputkey"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="button" id="keyleft" class="inputkey"></td>
+                                        <td><input type="button" id="keydown" class="inputkey"></td>
+                                        <td><input type="button" id="keyright" class="inputkey"></td>
+                                    </tr>
+                                </table>
+                                <button type="button" class="btn  btn-primary" onclick="btn_saveKeys()">Save
+                                    Changes</button>
+                                <button type="button" class="btn btn-primary" onclick="keys.setDefault()">Default
+                                    Keys</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="btn_startgame" onclick="btn_startNewGame()">Start
+                    Game</button>
+                <button type="button" class="btn btn-primary" id="btn_returngame" onclick="returnToGame()">Return To The
+                    Game</button>
+
+            </div>
+            <!-- SETTINGS -->
+        </div>
+        <!-- CONTENT -->
+
+
+        <!-- ABOUT -->
+        <!-- Modal Dialog -->
+        <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">About</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="showContent()">
+                            <span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This game created by Ron Israel and Niv Goldshlager.</p>
+                        <p>We used jQuery plugins for validation and date picker on register and login forms.</p>
+                        <p>We had no difficulties during the work</p>
+                        <img src="./images/gifs/1.gif" style="width: 300px; border-radius: 14px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Dialog -->
+        <!-- ABOUT -->
+
+
+        <!-- GAME BOARD -->
+        <div id="game_grid" class="game">
+            <audio id="gametheme" src="./audio/theme.mp3"></audio>
+            <audio id="deaththeme" src="./audio/wasted.mp3"></audio>
+            <img id="gamelogo" src="images/logo.png">
+            <table>
+                <td style="padding-right: 15px;">
+                    <div class="box">
+                        <div class="playerStatus">
+                            <input id="lblName" type="button" style="width: 90%;">
+                            <!-- <input id="lblLives" type="button" class="gameInfo" style="display: none;"> -->
+                            <div style="margin-top: 10px;">
+                                <table>
+                                    <tr>
+                                        <td><img src="images/paclive.png" class="img_paclive" id="live1"></td>
+                                        <td><img src="images/paclive.png" class="img_paclive" id="live2"></td>
+                                        <td><img src="images/paclive.png" class="img_paclive" id="live3"></td>
+                                        <td><img src="images/paclive.png" class="img_paclive" id="live4"></td>
+                                        <td><img src="images/paclive.png" class="img_paclive" id="live5"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="gameStatus">
+                                        <p>SCORE:</p>
+                                        <input id="lblScore" type="button" class="gameInfo" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="gameStatus">
+                                        <p>TIME:</p>
+                                        <input id="lblTime" type="button" class="gameInfo" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="game">
+                        <canvas class="canvas" id="canvas" width="720" height="520"></canvas>
+                    </div>
+                </td>
+
+                <td style="padding-left: 15px;">
+                    <div class="box">
+                        <span style="vertical-align: top; font-weight: bolder;">Power Pellets:</span>
+                        <input id="lblBalls" type="button" style="width: 40%; margin-bottom: 10px;">
+
+                        <table>
+                            <td><input type="button" id="showp5" class="powerPelletsImg" value="5"></td>
+                            <td><input type="button" id="showp15" class="powerPelletsImg" value="15"></td>
+                            <td><input type="button" id="showp25" class="powerPelletsImg" value="25"></td>
+                        </table>
+                    </div>
+
+                    <div class="box">
+                        <p style="font-weight: bolder">MAX TIME:</p>
+                        <input id="lblMaxTime" type="button" class="gameInfo" />
+                    </div>
+
+                    <div class="box">
+                        <table>
+                            <td><img src="images/ghosts/1.png" id="ghost1" style="width: 50px;"></td>
+                            <td><img src="images/ghosts/2.png" id="ghost2" style="width: 45px;"></td>
+                            <td><img src="images/ghosts/3.png" id="ghost3" style="width: 45px;"></td>
+                            <td><img src="images/ghosts/4.png" id="ghost4" style="width: 50px; height: 49px;"></td>
+                        </table>
+                    </div>
+
+                    <div class="box">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td><input type="button" id="showkeyup" class="inputkey"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" id="showkeyleft" class="inputkey"></td>
+                                <td><input type="button" id="showkeydown" class="inputkey"></td>
+                                <td><input type="button" id="showkeyright" class="inputkey"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </table>
+        </div>
+        <!-- GAME BOARD -->
+
+
+
+
+
+    </div>
+    <!-- ALL SITE -->
+
+    <!-- FOOTER -->
+    <footer>
+        <span>© This project is one of the assignments in Web Development Environments course of BGU
+            UNIVERSITY - April 2020.<br></span>
+        <span>Githubs: <span>Niv Goldshlager: <a href="https://github.com/nivgold"> <i class="fa fa-github"></i></a></span>,  Ron Israel</span>
+        <a style="padding-left: 25px;" href="mailto:niv_ron@pac-man.com">contact us!</a>
+    </footer>
+    <!-- FOOTER -->
+
 </body>
-
-</html>

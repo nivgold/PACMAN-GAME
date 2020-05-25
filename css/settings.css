@@ -1,0 +1,117 @@
+.btn_set{
+    height: 5px;
+}
+
+.inputkey {
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+}
+
+#setkeyleft{
+    background-image: url("../images/keys/ArrowLeft.png");
+}
+#setkeyright{
+    background-image: url("../images/keys/ArrowRight.png");
+}
+#setkeyup{
+    background-image: url("../images/keys/ArrowUp.png");
+}
+#setkeydown{
+    background-image: url("../images/keys/ArrowDown.png");
+}
+
+.ghostbutton {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    border-radius: 8px;
+    background-color: white;
+    border: white;
+  }
+
+
+#ghostBlinky{
+    background-image: url("../images/ghosts/blinky.png");
+}
+
+#ghostClyde{
+    background-image: url("../images/ghosts/clyde.png");
+
+}
+#ghostInky{
+    background-image: url("../images/ghosts/inky.png");
+}
+#ghostPinky{
+    background-image: url("../images/ghosts/pinky.png");
+}
+
+.ghostname{
+    font-weight: bold;
+    text-align: center;
+}
+
+.setPowerPellet{
+    width: 50px;
+    height: 50px;
+    /* background-image: url("../images/powerPellets/blue.png"); */
+    background-size: cover;
+    background-color: white;
+    border: 0ch;
+    color: white;
+    font: bold;
+}
+
+#p5{
+    background-image: url("../images/powerPellets/blue.png");
+}
+
+#p15{
+    background-image: url("../images/powerPellets/red.png");
+}
+
+#p25{
+    background-image: url("../images/powerPellets/yellow.png");
+}
+
+#btn_returngame{
+    float: left;
+    display: none;
+    margin-left: 5px;
+}
+
+#btn_startgame{
+    float: left;
+}
+
+/* .setTime{
+    float: left;
+    width: 100px;
+    margin-right: 10px;
+    border: solid gainsboro;
+}
+
+.setBalls{
+    float: left;
+   border: solid gainsboro;
+     margin: 20px; 
+    padding:10px; 
+} */
+
+.setSettings{
+    border: 0.5px solid gainsboro;
+    width: auto;
+    /* margin-bottom: 2px; */
+}
+
+.powerPelletsImg{
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+    background-color: Transparent;
+    border: none;
+    color: white;
+    /* font-weight: bolder; */
+    font-size: 20px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
