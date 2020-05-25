@@ -6,4 +6,4 @@
 * IDs: 203243977, 208082586
 
 ## URL
-https://sise-web-development-environments.github.io/assignment2-niv-ron/
+https://nivgold.github.io/PACMAN-GAME/
